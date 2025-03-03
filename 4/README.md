@@ -1,37 +1,3 @@
-# 🗓️ FlowerMonthly
-
-> 🔎 Check https://flower.ai for all things Federated Learning and Flower! 
-
-The FlowerMonthly is a monthly online event organised by the team behind [Flower, A Friendly Federated Learning Framework](https://flower.ai/) that runs for one hour on the first Wednesday of each month (typically starting at 0900 SF, 1200 NY, 1700 LON, 1800 MAD, 2130 IST, 0000 北京) and is divided into four blocks of content:
-
-  1. A platform update given by a member of the Flower team
-  2. A 30 min presentation by a leading expert in Federated Learning
-  3. A 15 min hands-on example of cool things people do with Flower
-  4. Open discussion and Q&A
-
-This repository contains some of the code examples presented in the Flower's FlowerMonthly series. You can see all past event [in the Flower site](https://flower.ai/conf/flower-monthly/). Jump on the fascinating FL train! 
-
-> Join our [Slack channel](https://flower.ai/join-slack/) to chat directly to thousands already using Flower and to reach out to members of the Flower Team. Whether you are working on an amazing new feature or you hit a roadblock with your FL setup, [reach us also on GitHub](https://github.com/adap/flower) by submitting a PR or by opening an Issue.
-
-
-## Content of this repo
-
-> This repo will keep getting more examples after each Flower Monthly so be sure to come by & pull again.
-
-
-To start this repo we have ported the [pytorch_simulation](https://github.com/adap/flower/tree/main/examples/simulation_pytorch) Flower example and adapted it so it works with [Hydra](https://hydra.cc/) configs to make the parameterisation of your FL experiments easy and flexible. The same could have been achieved using [AwesomeYaml](https://github.com/SamsungLabs/awesomeyaml) or other config systems. In fact, a previous version of this repo was entirely designed around AwesomeYaml (see tag `withAwesomeYaml` tag). I have added some small changes to the code provided by that example to make this repo more interesting, some of which is based on FlowerMonthly demos and talks. The code in this repo is validated using Flower's Virtual Client Engine for Simulation of FL workloads. However, the vast majority of the code here can be directly be used in gRPC-based Flower setups outside simulation.
-
-The purpose of this repo is to showcase through simple examples different functionalities of [Flower](https://github.com/adap/flower) (**give it a :star: if you use it**) so you can later use it in your projects. With this in mind, the dataset considered here considered, its partitioning and the training protocol as a whole is kept fairly simple. Here I use CIFAR-10 and split it following [LDA](https://arxiv.org/abs/1909.06335) for a fixed value of \alpha (which you can tune in the configs). By default I generate a 100-client split and sample 10 clients per round (this is a simple but very typical _cross-silo_ FL setup). Please note in this repo I have set sensible values for the hyperparameters but they likely need to be adjusted for each different experiment in this repo. **The purpose of this repo is to showcase how to use Flower in different ways whether you need the vanilla behaviour or a highly customised FL pipeline**
-
-Currently, this repo provides:
-
-* A `conf/strategy/strategy_model_saving.yaml` config showing how with small changes to a standard Flower strategy you can keep track of all variables you want (e.g. global model state) so you can either generate checkpoints or retrieve their values at the end of the simulation.
-* A `conf/strategy/strategy_kd.yaml` config (based on 7 June 2023 FLowerSummit talk) showing how to do a simple form of federated Knowledge-distillation.
-* A `conf/strategy/custom_strategy.yaml` config (based on 7 June 2023 FLowerSummit talk) showcasing how to design a custom Flower strategy with ease.
-* A `conf/base_kd.yaml` a top-level config that you can run to see a simple federated KD setting in action.
-* A `conf/base_v2.yaml` a top-level config that makes the setup in `base.yaml` a bit more interesting: using ResNet18, clients using GPU and a custom strategy.
-* A `conf/base.yaml` a top-level config with all the elements needed to define a complete FL setup. It uses a very lightweight model so all systems should be capable of running it (no GPU required).
-* Integration with `Hydra`, so you can customise how your experiment runs directly from the command line.
 
 ## Setup
 
@@ -71,18 +37,12 @@ python main.py # will use the default `cpu_client.yaml`
 
 # note that you'll need a GPU for this
 python main.py client=gpu_client # will use the client as defined in `conf/client/gpu_client.yaml`
-```
 
-Let's say now that you have a concrete setting you'd like to evaluate often enough without having to modify from the "base" config to do so. The best way to do this would be to define a new top-level config with the `default:` your setup needs. For example, let's imagine you want your new setting to always use `resnet18.yaml`, `gpu_client.yaml` and `custom_strategy.yaml`. You can define a custom top-level config as follows:
-
-```yaml
+yaml
 # this defines a top-level config (just like base.yaml) does but with changes to the `defaults` and the FL setup parameterised in `server:`
 
 defaults: # i.e. configs used if you simply run the code as `python main.py`
   - client: gpu_client # this points to the file: client/cpu_client.yaml
-  - model: resnet18 # this points to the file: model/resnet18.yaml
-  - strategy: custom_strategy # points to strategy/custom_strategy.yaml
-
 [...] # rest of the necessary elements: dataset, server, misc
 ```
 

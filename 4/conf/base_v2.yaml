@@ -1,0 +1,20 @@
+
+# this defines a top-level config (just like base.yaml) does but with changes to the `defaults` and the FL setup parameterised in `server:`
+
+defaults: # i.e. configs used if you simply run the code as `python main.py`
+  - client: gpu_client 
+  - model: resnet18 
+  - strategy: fedavg 
+
+  
+server:
+  pool: 7
+  clients_per_round: 3
+  num_rounds: 3
+  fit_cfg: # config for each client's fit() method (this will be passed the strategy)
+    epochs: 10
+    batch_size: 32
+    num_cpu: ${client.resources.num_cpus} 
+
+misc:
+  attach: false # set to true if you want Flower's Virtual Client Engine (VCE) to attach to an already running Ray server

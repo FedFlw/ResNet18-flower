@@ -1,0 +1,121 @@
+[2024-10-25 10:31:52,727][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=1, round_timeout=None)
+[2024-10-25 10:31:54,652][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 8093645210.0, 'node:__internal_head__': 1.0, 'object_store_memory': 2147483648.0, 'node:127.0.0.1': 1.0, 'CPU': 8.0}
+[2024-10-25 10:31:54,652][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.dev/docs/framework/how-to-run-simulations.html
+[2024-10-25 10:31:54,652][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 3, 'num_gpus': 0}
+[2024-10-25 10:31:54,656][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 2 actors
+[2024-10-25 10:31:54,657][flwr][INFO] - Initializing global parameters
+[2024-10-25 10:31:54,657][flwr][INFO] - Requesting initial parameters from one random client
+[2024-10-25 10:31:55,979][flwr][INFO] - Received initial parameters from one random client
+[2024-10-25 10:31:55,980][flwr][INFO] - Evaluating initial parameters
+[2024-10-25 10:34:46,459][flwr][INFO] - initial parameters (loss, other metrics): 19.820815205574036, {'accuracy': 0.5259259259259259}
+[2024-10-25 10:34:46,461][flwr][INFO] - FL starting
+[2024-10-25 10:34:46,461][flwr][DEBUG] - fit_round 1: strategy sampled 2 clients (out of 7)
+[2024-10-25 10:34:46,689][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 151, in _submit_job
+    res, updated_context = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 425, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 306, in _fetch_future_result
+    res_cid, res, updated_context = ray.get(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=2148, ip=127.0.0.1, actor_id=210e2fce3596d3e09f2363f401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x10a0d97e0>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit
+    return maybe_call_fit(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit
+    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)
+TypeError: train() got an unexpected keyword argument 'optim'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=2148, ip=127.0.0.1, actor_id=210e2fce3596d3e09f2363f401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x10a0d97e0>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 2 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 76, in run\n    job_results = job_fn(client)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit\n    return maybe_call_fit(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit\n    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)\nTypeError: train() got an unexpected keyword argument \'optim\'\n',)
+
+[2024-10-25 10:34:46,690][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=2148, ip=127.0.0.1, actor_id=210e2fce3596d3e09f2363f401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x10a0d97e0>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit
+    return maybe_call_fit(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit
+    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)
+TypeError: train() got an unexpected keyword argument 'optim'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=2148, ip=127.0.0.1, actor_id=210e2fce3596d3e09f2363f401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x10a0d97e0>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 2 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 76, in run\n    job_results = job_fn(client)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit\n    return maybe_call_fit(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit\n    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)\nTypeError: train() got an unexpected keyword argument \'optim\'\n',)
+[2024-10-25 10:34:47,682][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 151, in _submit_job
+    res, updated_context = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 425, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 306, in _fetch_future_result
+    res_cid, res, updated_context = ray.get(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=2149, ip=127.0.0.1, actor_id=6091d25db214182a71599b4401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x1057ad750>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit
+    return maybe_call_fit(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit
+    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)
+TypeError: train() got an unexpected keyword argument 'optim'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=2149, ip=127.0.0.1, actor_id=6091d25db214182a71599b4401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x1057ad750>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 0 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 76, in run\n    job_results = job_fn(client)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit\n    return maybe_call_fit(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit\n    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)\nTypeError: train() got an unexpected keyword argument \'optim\'\n',)
+
+[2024-10-25 10:34:47,682][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=2149, ip=127.0.0.1, actor_id=6091d25db214182a71599b4401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x1057ad750>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit
+    return maybe_call_fit(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit
+    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)
+TypeError: train() got an unexpected keyword argument 'optim'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=2149, ip=127.0.0.1, actor_id=6091d25db214182a71599b4401000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x1057ad750>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 0 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 76, in run\n    job_results = job_fn(client)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit\n    return maybe_call_fit(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit\n    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)\nTypeError: train() got an unexpected keyword argument \'optim\'\n',)
+[2024-10-25 10:34:47,682][flwr][DEBUG] - fit_round 1 received 0 results and 2 failures
+[2024-10-25 10:38:06,424][flwr][INFO] - fit progress: (1, 19.882133662700653, {'accuracy': 0.5259259259259259}, 199.9622376660118)
+[2024-10-25 10:38:06,426][flwr][INFO] - evaluate_round 1: no clients selected, cancel
+[2024-10-25 10:38:06,426][flwr][INFO] - FL finished in 199.96396137500415
+[2024-10-25 10:38:06,426][flwr][INFO] - app_fit: losses_distributed []
+[2024-10-25 10:38:06,427][flwr][INFO] - app_fit: metrics_distributed_fit {}
+[2024-10-25 10:38:06,427][flwr][INFO] - app_fit: metrics_distributed {}
+[2024-10-25 10:38:06,427][flwr][INFO] - app_fit: losses_centralized [(0, 19.820815205574036), (1, 19.882133662700653)]
+[2024-10-25 10:38:06,427][flwr][INFO] - app_fit: metrics_centralized {'accuracy': [(0, 0.5259259259259259), (1, 0.5259259259259259)]}

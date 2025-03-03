@@ -1,0 +1,164 @@
+[2024-11-05 15:44:09,371][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=100, round_timeout=None)
+[2024-11-05 15:44:11,312][flwr][INFO] - Flower VCE: Ray initialized with resources: {'node:127.0.0.1': 1.0, 'node:__internal_head__': 1.0, 'CPU': 8.0, 'object_store_memory': 2147483648.0, 'memory': 8042522215.0}
+[2024-11-05 15:44:11,312][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.dev/docs/framework/how-to-run-simulations.html
+[2024-11-05 15:44:11,312][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 3, 'num_gpus': 0}
+[2024-11-05 15:44:11,316][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 2 actors
+[2024-11-05 15:44:11,316][flwr][INFO] - Initializing global parameters
+[2024-11-05 15:44:11,316][flwr][INFO] - Requesting initial parameters from one random client
+[2024-11-05 15:44:12,700][flwr][INFO] - Received initial parameters from one random client
+[2024-11-05 15:44:12,700][flwr][INFO] - Evaluating initial parameters
+[2024-11-05 15:47:12,407][flwr][INFO] - initial parameters (loss, other metrics): 20.110847890377045, {'accuracy': 0.5530864197530864}
+[2024-11-05 15:47:12,409][flwr][INFO] - FL starting
+[2024-11-05 15:47:12,409][flwr][DEBUG] - fit_round 1: strategy sampled 2 clients (out of 7)
+[2024-11-05 16:04:17,680][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: DefaultActor
+	actor_id: 936aafec33d058e07728f07d01000000
+	pid: 14651
+	namespace: 518699eb-da40-4b12-b837-acf9fc09c771
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code None.
+ Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1684, in ray._raylet.execute_task_with_cancellation_handler
+  File "python/ray/_raylet.pyx", line 1366, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1367, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/util/tracing/tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 76, in run
+    job_results = job_fn(client)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit
+    return maybe_call_fit(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit
+    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)
+  File "/Users/iyadwehbe/Downloads/4/src/model_utils.py", line 32, in train
+    loss.backward()
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+    torch.autograd.backward(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+    _engine_run_backward(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/autograd/graph.py", line 769, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1787, in ray._raylet.task_execution_handler
+  File "python/ray/_raylet.pyx", line 1715, in ray._raylet.execute_task_with_cancellation_handler
+AttributeError: 'ray._raylet.CoreWorker' object has no attribute 'actors'
+An unexpected internal error occurred while the worker was executing a task.
+[2024-11-05 16:04:17,681][flwr][WARNING] - Actor(936aafec33d058e07728f07d01000000) will be remove from pool.
+[2024-11-05 16:04:17,684][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 151, in _submit_job
+    res, updated_context = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 425, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 315, in _fetch_future_result
+    raise ex
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 306, in _fetch_future_result
+    res_cid, res, updated_context = ray.get(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/worker.py", line 2526, in get
+    raise value
+ray.exceptions.RayActorError: The actor died unexpectedly before finishing this task.
+	class_name: DefaultActor
+	actor_id: 936aafec33d058e07728f07d01000000
+	pid: 14651
+	namespace: 518699eb-da40-4b12-b837-acf9fc09c771
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code None.
+ Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1684, in ray._raylet.execute_task_with_cancellation_handler
+  File "python/ray/_raylet.pyx", line 1366, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1367, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/util/tracing/tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 76, in run
+    job_results = job_fn(client)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit
+    return maybe_call_fit(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit
+    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)
+  File "/Users/iyadwehbe/Downloads/4/src/model_utils.py", line 32, in train
+    loss.backward()
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+    torch.autograd.backward(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+    _engine_run_backward(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/autograd/graph.py", line 769, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1787, in ray._raylet.task_execution_handler
+  File "python/ray/_raylet.pyx", line 1715, in ray._raylet.execute_task_with_cancellation_handler
+AttributeError: 'ray._raylet.CoreWorker' object has no attribute 'actors'
+An unexpected internal error occurred while the worker was executing a task.
+
+[2024-11-05 16:04:17,684][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: DefaultActor
+	actor_id: 936aafec33d058e07728f07d01000000
+	pid: 14651
+	namespace: 518699eb-da40-4b12-b837-acf9fc09c771
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code None.
+ Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1684, in ray._raylet.execute_task_with_cancellation_handler
+  File "python/ray/_raylet.pyx", line 1366, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1367, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1418, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1424, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1364, in ray._raylet.execute_task.function_executor
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/function_manager.py", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/util/tracing/tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 76, in run
+    job_results = job_fn(client)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 207, in fit
+    return maybe_call_fit(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/client.py", line 234, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 238, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 46, in fit
+    train(self.net, trainloader, epochs=config["epochs"], device=self.device, optim=optimizer)
+  File "/Users/iyadwehbe/Downloads/4/src/model_utils.py", line 32, in train
+    loss.backward()
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+    torch.autograd.backward(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+    _engine_run_backward(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/torch/autograd/graph.py", line 769, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1787, in ray._raylet.task_execution_handler
+  File "python/ray/_raylet.pyx", line 1715, in ray._raylet.execute_task_with_cancellation_handler
+AttributeError: 'ray._raylet.CoreWorker' object has no attribute 'actors'
+An unexpected internal error occurred while the worker was executing a task.

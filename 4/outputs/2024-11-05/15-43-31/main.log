@@ -1,0 +1,345 @@
+[2024-11-05 15:43:31,740][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=100, round_timeout=None)
+[2024-11-05 15:43:33,739][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 7671611392.0, 'node:127.0.0.1': 1.0, 'CPU': 8.0, 'object_store_memory': 2147483648.0, 'node:__internal_head__': 1.0}
+[2024-11-05 15:43:33,739][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.dev/docs/framework/how-to-run-simulations.html
+[2024-11-05 15:43:33,740][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 3, 'num_gpus': 0}
+[2024-11-05 15:43:33,744][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 2 actors
+[2024-11-05 15:43:33,744][flwr][INFO] - Initializing global parameters
+[2024-11-05 15:43:33,744][flwr][INFO] - Requesting initial parameters from one random client
+[2024-11-05 15:43:34,893][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 151, in _submit_job
+    res, updated_context = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 425, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 306, in _fetch_future_result
+    res_cid, res, updated_context = ray.get(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+AttributeError: module 'src' has no attribute 'models'
+
+During handling of the above exception, another exception occurred:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate
+    obj = import_module(mod)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62
+    '''
+IndentationError: unexpected indent
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target
+    target = _locate(target)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate
+    raise ImportError(
+ImportError: Error loading 'src.models.ResNet18':
+IndentationError('unexpected indent', ('/Users/iyadwehbe/Downloads/4/src/models.py', 62, 4, "    '''\n", 62, -1))
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target
+    return _target_(*args, **kwargs)
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__
+    self.net = instantiate(self.cfg.model)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node
+    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.
+full_key: cfg.model
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    client = check_clientfn_returns_client(client_fn(cid))
+  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn
+    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node
+    return _call_target(_target_, partial, args, kwargs, full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error in call to target 'src.client.FlowerClient':
+InstantiationException("Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model")
+full_key: client.object
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 4 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 644, in _locate\n    obj = getattr(obj, part)\nAttributeError: module \'src\' has no attribute \'models\'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate\n    obj = import_module(mod)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import\n  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load\n  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked\n  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked\n  File "<frozen importlib._bootstrap_external>", line 879, in exec_module\n  File "<frozen importlib._bootstrap_external>", line 1017, in get_code\n  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code\n  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed\n  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62\n    \'\'\'\nIndentationError: unexpected indent\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target\n    target = _locate(target)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate\n    raise ImportError(\nImportError: Error loading \'src.models.ResNet18\':\nIndentationError(\'unexpected indent\', (\'/Users/iyadwehbe/Downloads/4/src/models.py\', 62, 4, "    \'\'\'\\n", 62, -1))\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target\n    return _target_(*args, **kwargs)\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__\n    self.net = instantiate(self.cfg.model)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node\n    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    client = check_clientfn_returns_client(client_fn(cid))\n  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn\n    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node\n    return _call_target(_target_, partial, args, kwargs, full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error in call to target \'src.client.FlowerClient\':\nInstantiationException("Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\\nfull_key: cfg.model")\nfull_key: client.object\n',)
+
+[2024-11-05 15:43:34,893][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+AttributeError: module 'src' has no attribute 'models'
+
+During handling of the above exception, another exception occurred:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate
+    obj = import_module(mod)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62
+    '''
+IndentationError: unexpected indent
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target
+    target = _locate(target)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate
+    raise ImportError(
+ImportError: Error loading 'src.models.ResNet18':
+IndentationError('unexpected indent', ('/Users/iyadwehbe/Downloads/4/src/models.py', 62, 4, "    '''\n", 62, -1))
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target
+    return _target_(*args, **kwargs)
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__
+    self.net = instantiate(self.cfg.model)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node
+    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.
+full_key: cfg.model
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    client = check_clientfn_returns_client(client_fn(cid))
+  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn
+    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node
+    return _call_target(_target_, partial, args, kwargs, full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error in call to target 'src.client.FlowerClient':
+InstantiationException("Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model")
+full_key: client.object
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 4 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 644, in _locate\n    obj = getattr(obj, part)\nAttributeError: module \'src\' has no attribute \'models\'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate\n    obj = import_module(mod)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import\n  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load\n  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked\n  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked\n  File "<frozen importlib._bootstrap_external>", line 879, in exec_module\n  File "<frozen importlib._bootstrap_external>", line 1017, in get_code\n  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code\n  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed\n  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62\n    \'\'\'\nIndentationError: unexpected indent\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target\n    target = _locate(target)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate\n    raise ImportError(\nImportError: Error loading \'src.models.ResNet18\':\nIndentationError(\'unexpected indent\', (\'/Users/iyadwehbe/Downloads/4/src/models.py\', 62, 4, "    \'\'\'\\n", 62, -1))\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target\n    return _target_(*args, **kwargs)\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__\n    self.net = instantiate(self.cfg.model)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node\n    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    client = check_clientfn_returns_client(client_fn(cid))\n  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn\n    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node\n    return _call_target(_target_, partial, args, kwargs, full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error in call to target \'src.client.FlowerClient\':\nInstantiationException("Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\\nfull_key: cfg.model")\nfull_key: client.object\n',)
+[2024-11-05 15:43:34,894][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+AttributeError: module 'src' has no attribute 'models'
+
+During handling of the above exception, another exception occurred:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate
+    obj = import_module(mod)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62
+    '''
+IndentationError: unexpected indent
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target
+    target = _locate(target)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate
+    raise ImportError(
+ImportError: Error loading 'src.models.ResNet18':
+IndentationError('unexpected indent', ('/Users/iyadwehbe/Downloads/4/src/models.py', 62, 4, "    '''\n", 62, -1))
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target
+    return _target_(*args, **kwargs)
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__
+    self.net = instantiate(self.cfg.model)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node
+    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.
+full_key: cfg.model
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    client = check_clientfn_returns_client(client_fn(cid))
+  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn
+    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node
+    return _call_target(_target_, partial, args, kwargs, full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error in call to target 'src.client.FlowerClient':
+InstantiationException("Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model")
+full_key: client.object
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 4 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 644, in _locate\n    obj = getattr(obj, part)\nAttributeError: module \'src\' has no attribute \'models\'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate\n    obj = import_module(mod)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import\n  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load\n  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked\n  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked\n  File "<frozen importlib._bootstrap_external>", line 879, in exec_module\n  File "<frozen importlib._bootstrap_external>", line 1017, in get_code\n  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code\n  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed\n  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62\n    \'\'\'\nIndentationError: unexpected indent\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target\n    target = _locate(target)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate\n    raise ImportError(\nImportError: Error loading \'src.models.ResNet18\':\nIndentationError(\'unexpected indent\', (\'/Users/iyadwehbe/Downloads/4/src/models.py\', 62, 4, "    \'\'\'\\n", 62, -1))\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target\n    return _target_(*args, **kwargs)\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__\n    self.net = instantiate(self.cfg.model)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node\n    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    client = check_clientfn_returns_client(client_fn(cid))\n  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn\n    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node\n    return _call_target(_target_, partial, args, kwargs, full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error in call to target \'src.client.FlowerClient\':\nInstantiationException("Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\\nfull_key: cfg.model")\nfull_key: client.object\n',)
+[2024-11-05 15:43:34,895][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/app.py", line 308, in start_simulation
+    hist = run_fl(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/server/app.py", line 225, in run_fl
+    hist = server.fit(num_rounds=config.num_rounds, timeout=config.round_timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/server/server.py", line 90, in fit
+    self.parameters = self._get_initial_parameters(timeout=timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/server/server.py", line 279, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(ins=ins, timeout=timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 196, in get_parameters
+    res = self._submit_job(get_parameters, timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 163, in _submit_job
+    raise ex
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 151, in _submit_job
+    res, updated_context = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 425, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 306, in _fetch_future_result
+    res_cid, res, updated_context = ray.get(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 24, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/ray/_private/worker.py", line 2524, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+AttributeError: module 'src' has no attribute 'models'
+
+During handling of the above exception, another exception occurred:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate
+    obj = import_module(mod)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62
+    '''
+IndentationError: unexpected indent
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target
+    target = _locate(target)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate
+    raise ImportError(
+ImportError: Error loading 'src.models.ResNet18':
+IndentationError('unexpected indent', ('/Users/iyadwehbe/Downloads/4/src/models.py', 62, 4, "    '''\n", 62, -1))
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target
+    return _target_(*args, **kwargs)
+  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__
+    self.net = instantiate(self.cfg.model)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node
+    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.
+full_key: cfg.model
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    client = check_clientfn_returns_client(client_fn(cid))
+  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn
+    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node
+    return _call_target(_target_, partial, args, kwargs, full_key)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target
+    raise InstantiationException(msg) from e
+hydra.errors.InstantiationException: Error in call to target 'src.client.FlowerClient':
+InstantiationException("Error locating target 'src.models.ResNet18', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model")
+full_key: client.object
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=14625, ip=127.0.0.1, actor_id=a27add134b182abb3954a4a501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x107ed9810>)
+  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 90, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client run.\n\tClient 4 crashed when the DefaultActor was running its run.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 644, in _locate\n    obj = getattr(obj, part)\nAttributeError: module \'src\' has no attribute \'models\'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 650, in _locate\n    obj = import_module(mod)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/importlib/__init__.py", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import\n  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load\n  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked\n  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked\n  File "<frozen importlib._bootstrap_external>", line 879, in exec_module\n  File "<frozen importlib._bootstrap_external>", line 1017, in get_code\n  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code\n  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed\n  File "/Users/iyadwehbe/Downloads/4/src/models.py", line 62\n    \'\'\'\nIndentationError: unexpected indent\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target\n    target = _locate(target)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/utils.py", line 658, in _locate\n    raise ImportError(\nImportError: Error loading \'src.models.ResNet18\':\nIndentationError(\'unexpected indent\', (\'/Users/iyadwehbe/Downloads/4/src/models.py\', 62, 4, "    \'\'\'\\n", 62, -1))\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 92, in _call_target\n    return _target_(*args, **kwargs)\n  File "/Users/iyadwehbe/Downloads/4/src/client.py", line 29, in __init__\n    self.net = instantiate(self.cfg.model)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node\n    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nfull_key: cfg.model\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    client = check_clientfn_returns_client(client_fn(cid))\n  File "/Users/iyadwehbe/Downloads/4/main.py", line 52, in client_fn\n    return instantiate(cfg.client.object, cid=cid, _recursive_=False).to_client()\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate\n    return instantiate_node(\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 347, in instantiate_node\n    return _call_target(_target_, partial, args, kwargs, full_key)\n  File "/opt/anaconda3/envs/flowermonthly/lib/python3.10/site-packages/hydra/_internal/instantiate/_instantiate2.py", line 97, in _call_target\n    raise InstantiationException(msg) from e\nhydra.errors.InstantiationException: Error in call to target \'src.client.FlowerClient\':\nInstantiationException("Error locating target \'src.models.ResNet18\', set env var HYDRA_FULL_ERROR=1 to see chained exception.\\nfull_key: cfg.model")\nfull_key: client.object\n',)
+
+[2024-11-05 15:43:34,895][flwr][ERROR] - Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 3, 'num_gpus': 0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 3, 'num_gpus': 0}.
+Take a look at the Flower simulation examples for guidance <https://flower.dev/docs/framework/how-to-run-simulations.html>.

@@ -1,0 +1,2 @@
+_target_: src.models.Net
+num_classes: 2 # relative definition to what's in dataset.num_classes
